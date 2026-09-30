@@ -3,7 +3,7 @@ import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View,
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors } from "./theme";
 
-export const mascot = require("../../assets/mascot.jpg");
+export const mascot = require("../../assets/mascot-transparent.png");
 export function Screen({ children }: PropsWithChildren) { return <SafeAreaView edges={["top", "left", "right"]} style={styles.safeArea}><ScrollView style={styles.scroll} contentContainerStyle={styles.screen} keyboardShouldPersistTaps="handled">{children}</ScrollView></SafeAreaView>; }
 export function Card({ children }: PropsWithChildren) { return <View style={styles.card}>{children}</View>; }
 export function Title({ children }: PropsWithChildren) { return <Text style={styles.title}>{children}</Text>; }
