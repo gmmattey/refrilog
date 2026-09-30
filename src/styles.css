@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #eef5fb;
+  --color-foreground: #16324a;
+  --color-card: #ffffff;
+  --color-card-foreground: #16324a;
+  --color-primary: #3b9eff;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #e4eef8;
+  --color-secondary-foreground: #16324a;
+  --color-muted: #e4eef8;
+  --color-muted-foreground: #5a7186;
+  --color-accent: #f4a7b8;
+  --color-accent-foreground: #3a2430;
+  --color-destructive: #d45263;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #d5e3ef;
+  --color-input: #d5e3ef;
+  --color-ring: #3b9eff;
+  --color-blush: #f4a7b8;
+  --color-lilac: #cbb6ea;
+  --color-track: #d9e7f4;
+  --color-ink: #16324a;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-2xl: 32px;
+  --radius-3xl: 36px;
+  --radius-4xl: 40px;
+
+  --shadow-card:
+    0px 0px 0px 1px rgba(22, 50, 74, 0.05),
+    0px 1px 2px rgba(22, 50, 74, 0.04),
+    0px 10px 24px -12px rgba(22, 50, 74, 0.12);
+  --shadow-float:
+    0px 0px 0px 1px rgba(22, 50, 74, 0.06),
+    0px 12px 32px -10px rgba(22, 50, 74, 0.16);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100dvh;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-image: radial-gradient(
+      900px 480px at 50% -8%,
+      #ffffff,
+      transparent 62%
+    );
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+:root {
+  --motion-stagger: 40ms;
+  --motion-micro: 80ms;
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-medium: 350ms;
+  --motion-slow: 400ms;
+  --motion-emphasis: 500ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-pop: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --motion-scale-modal: 0.96;
+}
+
+.progress-ring-arc {
+  transition: stroke-dashoffset var(--motion-emphasis) var(--ease-smooth-out);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.anim-rise {
+  animation: rise-in var(--motion-slow) var(--ease-smooth-out) both;
+}
+
+.anim-rise-2 {
+  animation-delay: 80ms;
+}
+
+.anim-rise-3 {
+  animation-delay: 140ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-ring-arc {
+    transition: none;
+  }
+
+  .anim-rise,
+  .anim-rise-2,
+  .anim-rise-3 {
+    animation: none;
+  }
+}

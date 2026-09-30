@@ -1,0 +1,16 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Download, RotateCcw, Share2 } from "lucide-react";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { APP_NAME, APP_TAGLINE, APP_VERSION } from "@/lib/constants";
+import { downloadCsv, entriesToCsv } from "@/lib/stats";
+import { shareSummary } from "@/lib/share";
+import { useRefriStore } from "@/lib/store";
+export const Route = createFileRoute("/ajustes")({ component: SettingsPage });
+function SettingsPage() {
+  const entries = useRefriStore((s) => s.entries); const settings = useRefriStore((s) => s.settings); const reset = useRefriStore((s) => s.resetData);
+  return <div className="px-5 pb-7 pt-5"><header className="mb-5"><h1 className="text-2xl font-bold tracking-tight">Ajustes</h1><p className="mt-1 text-sm text-muted-foreground">Seus dados e escolhas, neste aparelho.</p></header>
+    <section className="overflow-hidden rounded-3xl bg-card shadow-card"><button type="button" className="flex w-full items-center gap-3 px-4 py-4 text-left" onClick={() => downloadCsv(entriesToCsv(entries))}><Download className="size-5 text-primary" /><span><span className="block text-sm font-semibold">Exportar CSV</span><span className="block text-xs text-muted-foreground">{entries.length} registros para guardar</span></span></button><div className="mx-4 h-px bg-border" /><button type="button" className="flex w-full items-center gap-3 px-4 py-4 text-left" onClick={() => void shareSummary(entries, settings)}><Share2 className="size-5 text-primary" /><span><span className="block text-sm font-semibold">Compartilhar resumo</span><span className="block text-xs text-muted-foreground">Você escolhe quando e com quem</span></span></button><div className="mx-4 h-px bg-border" />
+    <AlertDialog><AlertDialogTrigger asChild><button type="button" className="flex w-full items-center gap-3 px-4 py-4 text-left"><RotateCcw className="size-5 text-destructive" /><span><span className="block text-sm font-semibold">Apagar todos os dados</span><span className="block text-xs text-muted-foreground">Remove todos os registros deste aparelho</span></span></button></AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Apagar seus registros?</AlertDialogTitle><AlertDialogDescription>Isso remove os registros e reinicia sua meta. Não é possível desfazer. Se quiser guardá-los, exporte o CSV antes.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Manter</AlertDialogCancel><AlertDialogAction className="bg-destructive text-destructive-foreground" onClick={reset}>Apagar</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog></section>
+    <section className="mt-8 text-center"><img src="/mascot.jpg" alt="" className="mx-auto size-20 object-contain" /><p className="mt-2 text-sm font-semibold">{APP_NAME}</p><p className="text-xs text-muted-foreground">{APP_TAGLINE}</p><p className="mt-2 text-xs text-muted-foreground">Versão {APP_VERSION}</p><p className="mt-3 text-xs text-muted-foreground">Os dados ficam neste navegador. Limpar os dados do navegador pode apagar seus registros.</p></section>
+  </div>;
+}
