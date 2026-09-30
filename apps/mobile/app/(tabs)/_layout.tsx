@@ -1,0 +1,3 @@
+import { Tabs } from "expo-router";
+import { colors } from "../../src/ui/theme";
+export default function TabsLayout() { return <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.blueDark, tabBarInactiveTintColor: colors.muted, tabBarStyle: { backgroundColor: "white", borderTopColor: colors.border }, tabBarLabelStyle: { fontWeight: "700" } }}><Tabs.Screen name="index" options={{ title: "Início" }} /><Tabs.Screen name="history" options={{ title: "Histórico" }} /><Tabs.Screen name="goals" options={{ title: "Objetivo" }} /><Tabs.Screen name="settings" options={{ title: "Ajustes" }} /></Tabs>; }

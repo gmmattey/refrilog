@@ -1,0 +1,1 @@
+export const colors = { blue: "#3A9EEA", blueDark: "#1879BD", blueSoft: "#E6F4FE", ink: "#183044", muted: "#64748B", surface: "#FFFFFF", background: "#F5FAFD", border: "#DCEAF3", danger: "#C53B45", gold: "#F3B633" };
