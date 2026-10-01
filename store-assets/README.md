@@ -34,5 +34,6 @@ Os PNGs de origem do Android ficam em `android/raw/` apenas para conferência lo
 
 ## Limites antes de publicar
 
-- O aplicativo também declara suporte a iPad; ainda faltam as capturas específicas do iPad para uma submissão iOS completa.
+- O aplicativo é exclusivo para iPhone; não são necessárias capturas de iPad.
+- As capturas precisam ser exportadas nos tamanhos exatos que a App Store Connect solicitar para o conjunto de iPhone escolhido.
 - O preview do Google Play deve ser hospedado em um vídeo do YouTube; este arquivo é a fonte local, não uma publicação.
