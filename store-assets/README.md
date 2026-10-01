@@ -2,6 +2,12 @@
 
 As peças usam somente telas reais do app e uma base demonstrativa local coerente; não representam dados de uma pessoa real. A direção editorial escolhida é **"Seu refri, do seu jeito"**: fundo claro, título grande, tela do produto em destaque e o mascote como companhia.
 
+## Ícones do app
+
+- `icons/app-store-1024.png` — ícone mestre do iOS, 1024 x 1024 px, sem canal alpha. O mesmo arquivo está configurado em `apps/mobile/assets/icon.png`.
+- `icons/google-play-512.png` — ícone de listagem do Google Play, 512 x 512 px, sem canal alpha.
+- Android também usa as camadas adaptativas em `apps/mobile/assets/android-icon-{background,foreground,monochrome}.png`: fundo azul-claro, mascote com transparência e silhueta para ícones temáticos.
+
 ## App Store — iPhone 6,3 polegadas
 
 Os quatro JPEGs em `ios/app-store-6.3/` têm 1206 x 2622 px e não têm canal alpha:
