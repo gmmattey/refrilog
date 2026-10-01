@@ -18,3 +18,5 @@ screenshots/
 store-assets/ios/*.png
 store-assets/ios/*raw*.mov
 store-assets/ios/refrilog-app-preview-886x1920.mp4
+store-assets/.generated/
+store-assets/android/raw/
