@@ -1,0 +1,7 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { confirmPreviousWeek } from "./medals.ts";
+import { weekKey } from "./stats.ts";
+import { DEFAULT_SETTINGS, type AppData } from "./types.ts";
+test("medalha só é elegível para semana encerrada, conferida e com meta da semana", () => { const now = new Date(2026, 8, 30, 12); const previous = new Date(now); previous.setDate(previous.getDate() - 7); const key = weekKey(previous); const data: AppData = { entries: [{ id: "a", at: previous.getTime() + 1000, brand: "Pepsi", ml: 350 }], settings: { ...DEFAULT_SETTINGS, onboarded: true, onboardedAt: new Date(2026, 8, 1).getTime(), objective: "track" }, weekGoals: [{ weekKey: key, objective: "reduce", goalMl: 500 }] }; const result = confirmPreviousWeek(data, now); assert.deepEqual(result.settings.confirmedWeeks, [key]); assert.deepEqual(result.settings.achievedWeeks, [key]); });
+test("mudar objetivo preserva a meta histórica e não concede medalha sem meta de redução", () => { const now = new Date(2026, 8, 30, 12); const previous = new Date(now); previous.setDate(previous.getDate() - 7); const key = weekKey(previous); const data: AppData = { entries: [], settings: { ...DEFAULT_SETTINGS, onboarded: true, onboardedAt: 1, objective: "reduce" }, weekGoals: [{ weekKey: key, objective: "track" }] }; assert.deepEqual(confirmPreviousWeek(data, now).settings.achievedWeeks, []); });

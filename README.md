@@ -1,31 +1,52 @@
 # RefriLog
 
-Um diário de refrigerantes com duas formas de uso: **Só registrar** ou **Reduzir no meu ritmo**. O projeto é uma aplicação web responsiva/PWA feita com React, TanStack Start e Zustand.
+RefriLog é um diário leve de refrigerantes para Android e iOS. Ele ajuda a registrar quantidades, marcas e custos informados sem julgamento: a pessoa pode apenas acompanhar ou definir uma meta semanal voluntária para reduzir no próprio ritmo.
 
-## Funcionalidades
+O produto mobile está em [`apps/mobile`](apps/mobile). A antiga PWA permanece neste repositório somente como referência recuperável durante a migração; não é o destino desta entrega e o app mobile não usa Vercel, autenticação, servidor ou serviço pago.
 
-- Registros de marca, versão, quantidade efetivamente consumida (ml) e custo opcional.
-- Histórico com edição e exclusão; visualização diária e semanal.
-- Objetivo de registro sem teto de consumo; objetivo de redução com meta semanal ajustável.
-- Conquistas de início e acompanhamento; a medalha de semana na meta exige que o usuário confira uma semana encerrada.
-- Compartilhamento voluntário de resumo e medalhas pelo recurso nativo do navegador (cópia de texto como alternativa).
-- Exportação CSV. Dados permanecem no armazenamento deste navegador; registros do protótipo anterior são preservados.
+## Funcionalidades do MVP mobile
 
-## Rodar
+- Onboarding com os modos **Só registrar** e **Reduzir no meu ritmo**.
+- Registro, edição e exclusão de consumo com marca, versão, quantidade efetivamente bebida, custo opcional e data/hora anterior.
+- Início, histórico diário/semanal, total de volume, marcas e **Gasto informado** (somente custos registrados).
+- Meta semanal voluntária, configurável, e medalhas de acompanhamento; a medalha de meta exige conferir uma semana encerrada e usa a meta guardada para aquela semana.
+- SQLite local com migração versionada, CSV para análise e backup JSON versionado validado antes de restaurar.
+- Cartão de resumo visualizado antes de compartilhar como imagem pela interface nativa, além do compartilhamento de texto.
+- Ajustes, privacidade local e exclusão total após confirmação.
+
+## Rodar no Android ou iOS
+
+Pré-requisitos: Node.js 22+ e Android Studio (Android) ou Xcode (iOS, apenas macOS).
 
 ```bash
+cd apps/mobile
 npm ci
-npm run dev
+npm run start
 ```
 
-Verificações: `npm run typecheck` e `npm run build`.
+No terminal do Expo, use `a` para um emulador Android ou `i` para um simulador iOS. Também é possível executar `npm run android` e `npm run ios`.
 
-## Hospedagem
+O MVP usa somente módulos compatíveis com Expo Go para a jornada normal. O compartilhamento de cartão depende da disponibilidade da integração nativa de compartilhamento no aparelho; valide-o em Android/iOS, não no navegador.
 
-Este repositório contém o código da aplicação, mas ainda não publica uma URL por si só. O projeto está configurado para gerar uma aplicação TanStack Start/Nitro com destino Vercel. Ao importar o repositório na Vercel, use o diretório raiz, o comando `npm run build` e Node.js 22 ou superior. Não configure `DATABASE_URL`: os registros são locais ao navegador e o app não usa contas nesta versão.
+## Verificações
 
-GitHub Pages não executa a saída de servidor deste projeto. A publicação deve ser validada no celular antes de divulgar o link.
+```bash
+cd apps/mobile
+npm run typecheck
+npm test
+npx expo-doctor
+npx expo export --platform android
+npx expo export --platform ios
+```
 
-## Limites atuais
+Os testes cobrem soma de volume/custo, custo ausente e decimal, limites locais de dia/semana, CSV, backup inválido e elegibilidade de medalha.
 
-Sem conta, sincronização ou importação de CSV. Limpar os dados do navegador pode apagar registros. Metas e medalhas refletem os registros informados; não inferem consumo nos dias sem anotação. As marcas são sugestões editáveis e não há catálogo nutricional.
+## Builds e publicação
+
+`apps/mobile/eas.json` inclui perfis de desenvolvimento, teste interno e produção. Não é necessário plano pago do EAS para executar localmente: `npx expo run:android` e `npx expo run:ios` geram builds locais depois que os ambientes nativos estiverem instalados.
+
+Os identificadores atuais `com.gmmattey.refrilog` são provisórios e precisam ser confirmados antes de registrar o app nas lojas. Não há credenciais, certificados nem segredos no repositório. Ainda faltam os materiais de loja, a confirmação dos identificadores, builds assinados e validação em aparelhos físicos antes de qualquer publicação.
+
+## Dados e backup
+
+Os dados ficam somente no aparelho e podem ser perdidos sem exportar um backup. CSV é para análise; o backup JSON do RefriLog é a única opção de restauração e é validado antes de trocar o banco local. Não existe migração automática do `localStorage` do navegador; veja [o plano de migração](docs/mobile-migration-plan.md) para o limite e o formato atual.
