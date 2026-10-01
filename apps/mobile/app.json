@@ -9,7 +9,7 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.gmmattey.refrilog",
+      "bundleIdentifier": "com.refrilog.app",
       "buildNumber": "1"
     },
     "android": {
