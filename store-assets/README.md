@@ -21,6 +21,15 @@ As versões editoriais desses quatro quadros estão em `ios/editorial/`. Elas re
 
 `ios/refrilog-app-preview-886x1920-v2.mp4` é um preview vertical H.264 de 18,97 segundos, 886 x 1920 px e 30 fps. Ele percorre as quatro experiências acima e está no tamanho aceito para App Preview do iPhone.
 
+## App Store — iPhone 6,5 polegadas
+
+As quatro peças em `ios/app-store-6.5/` têm 1284 x 2778 px, em JPEG e sem canal alpha. Este é o conjunto preparado para o campo de capturas do iPhone no App Store Connect:
+
+1. `01-resumo-semanal.jpg` — registro de hoje, panorama da semana e meta voluntária.
+2. `02-historico.jpg` — histórico por dia, marcas, versões, volume e custo informado.
+3. `03-meta-semanal.jpg` — escolha do objetivo e meta ajustável.
+4. `04-cartao-compartilhamento.jpg` — prévia do cartão antes de compartilhar.
+
 ## Google Play
 
 As capturas brutas vieram de um Android Pixel 9 API 36 dedicado ao RefriLog. As quatro peças finais para a ficha estão em `android/editorial/`, em JPEG 1080 x 1920 px e sem canal alpha:
